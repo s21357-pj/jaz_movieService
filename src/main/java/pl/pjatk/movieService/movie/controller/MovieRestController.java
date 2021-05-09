@@ -36,8 +36,8 @@ public class MovieRestController {
         return new ResponseEntity<Optional<Movie>>(movieService.updateMovies(id, v), HttpStatus.OK);
     }
     @DeleteMapping("/movies/{id}")
-    public ResponseEntity<String> deleteMovie(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteMovie(@PathVariable Long id) {
         movieService.deleteMovies(id);
-        return new ResponseEntity<String>("", HttpStatus.NO_CONTENT);
+        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }
 }

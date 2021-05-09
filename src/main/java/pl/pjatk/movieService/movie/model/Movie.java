@@ -1,14 +1,27 @@
 package pl.pjatk.movieService.movie.model;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 public class Movie {
 
+    private static final AtomicLong count = new AtomicLong(0);
     private Long id;
     private String name;
-    private String category;
+    private Category category;
     private Integer imdb_rate;
 
-    public Movie(Long id, String name, String category, Integer imdb_rate) {
-        this.id = id;
+    public enum Category {
+        ANIMATED,
+        COMEDY,
+        FANTASY,
+        HISTORICAL,
+        HORROR,
+        MUSICAL
+
+    }
+
+    public Movie(String name, Category category, Integer imdb_rate) {
+        this.id = count.incrementAndGet();
         this.name = name;
         this.category = category;
         this.imdb_rate = imdb_rate;
@@ -16,10 +29,6 @@ public class Movie {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -30,11 +39,11 @@ public class Movie {
         this.name = name;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 

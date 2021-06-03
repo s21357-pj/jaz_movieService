@@ -1,14 +1,20 @@
 package pl.pjatk.movieService.movie.model;
 
-import java.util.concurrent.atomic.AtomicLong;
-
+import javax.persistence.*;
+@Entity
 public class Movie {
-
-    private static final AtomicLong count = new AtomicLong(0);
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @Enumerated(EnumType.STRING)
     private Category category;
     private Integer imdb_rate;
+    private boolean isAvailable;
+
+    public Movie() {
+
+    }
 
     public enum Category {
         ANIMATED,
@@ -21,10 +27,13 @@ public class Movie {
     }
 
     public Movie(String name, Category category, Integer imdb_rate) {
-        this.id = count.incrementAndGet();
         this.name = name;
         this.category = category;
         this.imdb_rate = imdb_rate;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getId() {
@@ -53,6 +62,14 @@ public class Movie {
 
     public void setImdb_rate(Integer imdb_rate) {
         this.imdb_rate = imdb_rate;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(boolean available) {
+        isAvailable = available;
     }
 
 }
